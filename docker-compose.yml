@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16
+    container_name: customer_api_db
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-arogyapoudel}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password123}
+      POSTGRES_DB: ${POSTGRES_DB:-classicmodeldb}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - ./app/seed.sql:/docker-entrypoint-initdb.d/seed.sql
